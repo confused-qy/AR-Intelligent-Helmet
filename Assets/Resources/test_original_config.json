@@ -1,0 +1,249 @@
+{
+  "meters_per_pixel": 0.278,
+  "image_width": 827,
+  "image_height": 724,
+  "crosswalks_blocked": false,
+  "sidewalks_forbidden": true,
+  "buildings": [
+    {
+      "name": "TruckLoadingDock",
+      "entrance_norm": [0.8767, 0.9282],
+      "yaw_deg": 270
+    },
+    {
+      "name": "Stadium",
+      "entrance_norm": [0.6215, 0.6243],
+      "yaw_deg": 0
+    },
+    {
+      "name": "BusStation",
+      "entrance_norm": [0.2721, 0.2348],
+      "yaw_deg": 90
+    }
+  ],
+  "lanes": [
+    {
+      "id": "road",
+      "group": "city_roads",
+      "rect_norm": [0.078, 0.000, 0.136, 0.945],
+      "yaw_deg": 0,
+      "tolerance_deg": 70,
+      "left_boundary": "none",
+      "right_boundary": "none",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.8,
+      "wrong_way_cost_multiplier": 12.0,
+      "centerline_penalty": 0
+    },
+    {
+      "id": "road",
+      "group": "city_roads",
+      "rect_norm": [0.468, 0.000, 0.536, 0.945],
+      "yaw_deg": 0,
+      "tolerance_deg": 70,
+      "left_boundary": "none",
+      "right_boundary": "none",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.8,
+      "wrong_way_cost_multiplier": 12.0,
+      "centerline_penalty": 0
+    },
+    {
+      "id": "road",
+      "group": "city_roads",
+      "rect_norm": [0.858, 0.000, 0.914, 0.945],
+      "yaw_deg": 0,
+      "tolerance_deg": 70,
+      "left_boundary": "none",
+      "right_boundary": "none",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.8,
+      "wrong_way_cost_multiplier": 12.0,
+      "centerline_penalty": 0
+    },
+    {
+      "id": "road",
+      "group": "city_roads",
+      "rect_norm": [0.292, 0.430, 0.345, 0.895],
+      "yaw_deg": 0,
+      "tolerance_deg": 70,
+      "left_boundary": "none",
+      "right_boundary": "none",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.8,
+      "wrong_way_cost_multiplier": 12.0,
+      "centerline_penalty": 0
+    },
+    {
+      "id": "road",
+      "group": "city_roads",
+      "rect_norm": [0.680, 0.430, 0.735, 0.895],
+      "yaw_deg": 0,
+      "tolerance_deg": 70,
+      "left_boundary": "none",
+      "right_boundary": "none",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.8,
+      "wrong_way_cost_multiplier": 12.0,
+      "centerline_penalty": 0
+    },
+    {
+      "id": "road",
+      "group": "city_roads",
+      "rect_norm": [0.078, 0.120, 0.914, 0.170],
+      "yaw_deg": 90,
+      "tolerance_deg": 70,
+      "left_boundary": "none",
+      "right_boundary": "none",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.8,
+      "wrong_way_cost_multiplier": 12.0,
+      "centerline_penalty": 0
+    },
+    {
+      "id": "road",
+      "group": "city_roads",
+      "rect_norm": [0.060, 0.220, 0.965, 0.315],
+      "yaw_deg": 90,
+      "tolerance_deg": 70,
+      "left_boundary": "none",
+      "right_boundary": "none",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.8,
+      "wrong_way_cost_multiplier": 12.0,
+      "centerline_penalty": 0
+    },
+    {
+      "id": "road",
+      "group": "city_roads",
+      "rect_norm": [0.078, 0.355, 0.914, 0.455],
+      "yaw_deg": 90,
+      "tolerance_deg": 70,
+      "left_boundary": "none",
+      "right_boundary": "none",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.8,
+      "wrong_way_cost_multiplier": 12.0,
+      "centerline_penalty": 0
+    },
+    {
+      "id": "road",
+      "group": "city_roads",
+      "rect_norm": [0.078, 0.610, 0.914, 0.685],
+      "yaw_deg": 90,
+      "tolerance_deg": 70,
+      "left_boundary": "none",
+      "right_boundary": "none",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.8,
+      "wrong_way_cost_multiplier": 12.0,
+      "centerline_penalty": 0
+    },
+    {
+      "id": "road",
+      "group": "city_roads",
+      "rect_norm": [0.000, 0.885, 1.000, 0.985],
+      "yaw_deg": 90,
+      "tolerance_deg": 70,
+      "left_boundary": "none",
+      "right_boundary": "none",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.8,
+      "wrong_way_cost_multiplier": 12.0,
+      "centerline_penalty": 0
+    }
+  ],
+  "turn_connectors": [
+    {
+      "id": "all_turns_left_top",
+      "type": "any",
+      "rect_norm": [0.060, 0.110, 0.145, 0.180],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_center_top",
+      "type": "any",
+      "rect_norm": [0.455, 0.110, 0.548, 0.180],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_right_top",
+      "type": "any",
+      "rect_norm": [0.845, 0.110, 0.930, 0.180],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_left_upper",
+      "type": "any",
+      "rect_norm": [0.060, 0.210, 0.145, 0.325],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_center_upper",
+      "type": "any",
+      "rect_norm": [0.455, 0.210, 0.548, 0.325],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_right_upper",
+      "type": "any",
+      "rect_norm": [0.845, 0.210, 0.930, 0.325],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_left_middle",
+      "type": "any",
+      "rect_norm": [0.060, 0.345, 0.145, 0.465],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_center_middle",
+      "type": "any",
+      "rect_norm": [0.455, 0.345, 0.548, 0.465],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_right_middle",
+      "type": "any",
+      "rect_norm": [0.845, 0.345, 0.930, 0.465],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_left_lower",
+      "type": "any",
+      "rect_norm": [0.060, 0.600, 0.145, 0.695],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_center_lower",
+      "type": "any",
+      "rect_norm": [0.455, 0.600, 0.548, 0.695],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_right_lower",
+      "type": "any",
+      "rect_norm": [0.845, 0.600, 0.930, 0.695],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_left_bottom",
+      "type": "any",
+      "rect_norm": [0.060, 0.875, 0.145, 0.995],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_center_bottom",
+      "type": "any",
+      "rect_norm": [0.455, 0.875, 0.548, 0.995],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "all_turns_right_bottom",
+      "type": "any",
+      "rect_norm": [0.845, 0.875, 0.930, 0.995],
+      "cost_multiplier": 1.0
+    }
+  ],
+  "regions": []
+}

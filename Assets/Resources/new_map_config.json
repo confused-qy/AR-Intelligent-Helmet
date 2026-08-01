@@ -1,0 +1,839 @@
+{
+  "meters_per_pixel": 0.252,
+  "meters_per_pixel_z": 0.232,
+  "image_width": 1142,
+  "image_height": 1054,
+  "coordinate_system": {
+    "origin": "bottom_left",
+    "handedness": "right_handed",
+    "world_axes": {
+      "x": "image_right",
+      "z": "image_up",
+      "y": "up"
+    },
+    "world_origin_xz": [
+      -9,
+      -10
+    ],
+    "map_width_m": 287.784,
+    "map_height_m": 244.528
+  },
+  "buildings": [
+    {
+      "name": "SouthwestStart",
+      "entrance_px": [
+        45,
+        1006
+      ],
+      "yaw_deg": 90
+    },
+    {
+      "name": "NortheastGoal",
+      "entrance_px": [
+        1095,
+        307
+      ],
+      "yaw_deg": 0
+    }
+  ],
+  "roads_px": [
+    {
+      "id": "h_00_00",
+      "kind": "h",
+      "rect_px": [
+        17,
+        279,
+        1124,
+        335
+      ]
+    },
+    {
+      "id": "h_01_00",
+      "kind": "h",
+      "rect_px": [
+        17,
+        454,
+        1124,
+        510
+      ]
+    },
+    {
+      "id": "h_02_00",
+      "kind": "h",
+      "rect_px": [
+        17,
+        716,
+        1124,
+        773
+      ]
+    },
+    {
+      "id": "h_03_00",
+      "kind": "h",
+      "rect_px": [
+        17,
+        978,
+        1124,
+        1035
+      ]
+    },
+    {
+      "id": "v_00_00",
+      "kind": "v",
+      "rect_px": [
+        17,
+        16,
+        74,
+        1035
+      ]
+    },
+    {
+      "id": "v_01_00",
+      "kind": "v",
+      "rect_px": [
+        280,
+        454,
+        336,
+        1035
+      ]
+    },
+    {
+      "id": "v_02_00",
+      "kind": "v",
+      "rect_px": [
+        542,
+        16,
+        599,
+        1035
+      ]
+    },
+    {
+      "id": "v_03_00",
+      "kind": "v",
+      "rect_px": [
+        805,
+        454,
+        861,
+        1035
+      ]
+    },
+    {
+      "id": "v_04_00",
+      "kind": "v",
+      "rect_px": [
+        1067,
+        16,
+        1124,
+        1035
+      ]
+    }
+  ],
+  "lanes": [
+    {
+      "id": "h_00_00_westbound_north_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        17,
+        279,
+        1124,
+        306
+      ],
+      "yaw_deg": 270,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "h_00_00_eastbound_south_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        17,
+        308,
+        1124,
+        335
+      ],
+      "yaw_deg": 90,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "h_01_00_westbound_north_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        17,
+        454,
+        1124,
+        481
+      ],
+      "yaw_deg": 270,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "h_01_00_eastbound_south_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        17,
+        483,
+        1124,
+        510
+      ],
+      "yaw_deg": 90,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "h_02_00_westbound_north_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        17,
+        716,
+        1124,
+        743
+      ],
+      "yaw_deg": 270,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "h_02_00_eastbound_south_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        17,
+        745,
+        1124,
+        773
+      ],
+      "yaw_deg": 90,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "h_03_00_westbound_north_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        17,
+        978,
+        1124,
+        1005
+      ],
+      "yaw_deg": 270,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "h_03_00_eastbound_south_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        17,
+        1007,
+        1124,
+        1035
+      ],
+      "yaw_deg": 90,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "v_00_00_southbound_west_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        17,
+        16,
+        44,
+        1035
+      ],
+      "yaw_deg": 180,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "v_00_00_northbound_east_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        46,
+        16,
+        74,
+        1035
+      ],
+      "yaw_deg": 0,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "v_01_00_southbound_west_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        280,
+        454,
+        307,
+        1035
+      ],
+      "yaw_deg": 180,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "v_01_00_northbound_east_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        309,
+        454,
+        336,
+        1035
+      ],
+      "yaw_deg": 0,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "v_02_00_southbound_west_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        542,
+        16,
+        569,
+        1035
+      ],
+      "yaw_deg": 180,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "v_02_00_northbound_east_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        571,
+        16,
+        599,
+        1035
+      ],
+      "yaw_deg": 0,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "v_03_00_southbound_west_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        805,
+        454,
+        832,
+        1035
+      ],
+      "yaw_deg": 180,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "v_03_00_northbound_east_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        834,
+        454,
+        861,
+        1035
+      ],
+      "yaw_deg": 0,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "v_04_00_southbound_west_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        1067,
+        16,
+        1094,
+        1035
+      ],
+      "yaw_deg": 180,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    },
+    {
+      "id": "v_04_00_northbound_east_lane",
+      "group": "new_map_roads",
+      "rect_px": [
+        1096,
+        16,
+        1124,
+        1035
+      ],
+      "yaw_deg": 0,
+      "tolerance_deg": 70,
+      "left_boundary": "dashed",
+      "right_boundary": "dashed",
+      "allow_wrong_way": true,
+      "aligned_cost_multiplier": 0.85,
+      "wrong_way_cost_multiplier": 20,
+      "centerline_penalty": 1.2
+    }
+  ],
+  "turn_connectors": [
+    {
+      "id": "intersection_00_any_turn",
+      "type": "any",
+      "rect_px": [
+        7,
+        269,
+        84,
+        345
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_01_any_turn",
+      "type": "any",
+      "rect_px": [
+        7,
+        444,
+        84,
+        520
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_02_any_turn",
+      "type": "any",
+      "rect_px": [
+        7,
+        706,
+        84,
+        783
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_03_any_turn",
+      "type": "any",
+      "rect_px": [
+        7,
+        968,
+        84,
+        1045
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_04_any_turn",
+      "type": "any",
+      "rect_px": [
+        270,
+        444,
+        346,
+        520
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_05_any_turn",
+      "type": "any",
+      "rect_px": [
+        270,
+        706,
+        346,
+        783
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_06_any_turn",
+      "type": "any",
+      "rect_px": [
+        270,
+        968,
+        346,
+        1045
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_07_any_turn",
+      "type": "any",
+      "rect_px": [
+        532,
+        269,
+        609,
+        345
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_08_any_turn",
+      "type": "any",
+      "rect_px": [
+        532,
+        444,
+        609,
+        520
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_09_any_turn",
+      "type": "any",
+      "rect_px": [
+        532,
+        706,
+        609,
+        783
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_10_any_turn",
+      "type": "any",
+      "rect_px": [
+        532,
+        968,
+        609,
+        1045
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_11_any_turn",
+      "type": "any",
+      "rect_px": [
+        795,
+        444,
+        871,
+        520
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_12_any_turn",
+      "type": "any",
+      "rect_px": [
+        795,
+        706,
+        871,
+        783
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_13_any_turn",
+      "type": "any",
+      "rect_px": [
+        795,
+        968,
+        871,
+        1045
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_14_any_turn",
+      "type": "any",
+      "rect_px": [
+        1057,
+        269,
+        1134,
+        345
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_15_any_turn",
+      "type": "any",
+      "rect_px": [
+        1057,
+        444,
+        1134,
+        520
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_16_any_turn",
+      "type": "any",
+      "rect_px": [
+        1057,
+        706,
+        1134,
+        783
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_17_any_turn",
+      "type": "any",
+      "rect_px": [
+        1057,
+        968,
+        1134,
+        1045
+      ],
+      "cost_multiplier": 1.0
+    }
+  ],
+  "regions": [
+    {
+      "id": "intersection_00",
+      "rect_px": [
+        7,
+        269,
+        84,
+        345
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_01",
+      "rect_px": [
+        7,
+        444,
+        84,
+        520
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_02",
+      "rect_px": [
+        7,
+        706,
+        84,
+        783
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_03",
+      "rect_px": [
+        7,
+        968,
+        84,
+        1045
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_04",
+      "rect_px": [
+        270,
+        444,
+        346,
+        520
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_05",
+      "rect_px": [
+        270,
+        706,
+        346,
+        783
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_06",
+      "rect_px": [
+        270,
+        968,
+        346,
+        1045
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_07",
+      "rect_px": [
+        532,
+        269,
+        609,
+        345
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_08",
+      "rect_px": [
+        532,
+        444,
+        609,
+        520
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_09",
+      "rect_px": [
+        532,
+        706,
+        609,
+        783
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_10",
+      "rect_px": [
+        532,
+        968,
+        609,
+        1045
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_11",
+      "rect_px": [
+        795,
+        444,
+        871,
+        520
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_12",
+      "rect_px": [
+        795,
+        706,
+        871,
+        783
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_13",
+      "rect_px": [
+        795,
+        968,
+        871,
+        1045
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_14",
+      "rect_px": [
+        1057,
+        269,
+        1134,
+        345
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_15",
+      "rect_px": [
+        1057,
+        444,
+        1134,
+        520
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_16",
+      "rect_px": [
+        1057,
+        706,
+        1134,
+        783
+      ],
+      "cost_multiplier": 1.0
+    },
+    {
+      "id": "intersection_17",
+      "rect_px": [
+        1057,
+        968,
+        1134,
+        1045
+      ],
+      "cost_multiplier": 1.0
+    }
+  ]
+}
