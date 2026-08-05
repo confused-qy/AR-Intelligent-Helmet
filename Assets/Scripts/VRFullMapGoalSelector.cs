@@ -32,6 +32,10 @@ namespace MotorcycleNavigation
         public bool snapBlockedClicksToNearestRoad = true;
         public bool requireSemanticRoadWhenAvailable = true;
         public bool mouseUsesPointerPosition = true;
+        public bool doublePointerPressOpensMap = true;
+        public bool doublePointerPressClosesMap = true;
+        [Min(0.1f)] public float doublePointerPressIntervalSeconds = 0.35f;
+        [Min(0f)] public float doublePointerPressMaxDistancePixels = 100f;
         public bool syncCurrentPoseBeforePlanning = true;
         public bool snapStartPoseToNearestRoad = false;
         public bool moveCurrentPositionSourceWhenSnapped = false;
@@ -71,6 +75,13 @@ namespace MotorcycleNavigation
         private NavigationResult renderedPlan;
         private Texture2D generatedMapTexture;
         private bool visible;
+        private float lastPointerPressTime = -999f;
+        private Vector2 lastPointerPressPosition;
+        private int lastPointerDeviceId = -1;
+        private bool hasPendingPointerGoalSelection;
+        private float pendingPointerGoalSelectionTime = -999f;
+        private Ray pendingPointerGoalSelectionRay;
+        private bool pendingPointerGoalSelectionUsesRay;
         private float lastGoalSelectionTime = -999f;
         private NavigationResult loggedFailedPlan;
         private NavigationResult loggedSuccessfulPlan;
@@ -110,6 +121,7 @@ namespace MotorcycleNavigation
             if (toggleAction != null && toggleAction.action != null)
                 toggleAction.action.Disable();
 #endif
+            ResetDoublePointerPress();
         }
 
         private void LateUpdate()
@@ -140,13 +152,11 @@ namespace MotorcycleNavigation
             if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
                 TrySelectGoalFromMap();
 
-            if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                if (mouseUsesPointerPosition)
-                    TrySelectGoalFromMap(gazeCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-                else
-                    TrySelectGoalFromMap();
-            }
+            Pointer pointer = Pointer.current;
+            if (pointer != null && pointer.press.wasPressedThisFrame)
+                HandlePointerPress(pointer);
+
+            CompletePendingPointerGoalSelection();
 #endif
 
 #if ENABLE_LEGACY_INPUT_MANAGER
@@ -167,9 +177,111 @@ namespace MotorcycleNavigation
 
         public void SetVisible(bool isVisible)
         {
+            if (visible != isVisible)
+                ResetDoublePointerPress();
+
             visible = isVisible;
             if (canvas != null)
                 canvas.enabled = visible;
+        }
+
+#if ENABLE_INPUT_SYSTEM
+        private void HandlePointerPress(Pointer pointer)
+        {
+            Vector2 screenPosition = pointer.position.ReadValue();
+            float now = Time.unscaledTime;
+            float interval = Mathf.Max(0.1f, doublePointerPressIntervalSeconds);
+            float maxDistance = Mathf.Max(0f, doublePointerPressMaxDistancePixels);
+
+            if (!visible)
+            {
+                bool isDoublePress =
+                    doublePointerPressOpensMap &&
+                    lastPointerDeviceId == pointer.deviceId &&
+                    now - lastPointerPressTime <= interval &&
+                    (screenPosition - lastPointerPressPosition).sqrMagnitude <= maxDistance * maxDistance;
+
+                lastPointerPressTime = now;
+                lastPointerPressPosition = screenPosition;
+                lastPointerDeviceId = pointer.deviceId;
+
+                if (isDoublePress)
+                {
+                    SetVisible(true);
+                    LogSelection("Map opened by a double pointer press from " + pointer.displayName + ".");
+                }
+
+                return;
+            }
+
+            if (!doublePointerPressClosesMap)
+            {
+                ResetDoublePointerPress();
+                SelectGoalFromPointerPosition(screenPosition);
+                return;
+            }
+
+            bool isDoubleClose =
+                lastPointerDeviceId == pointer.deviceId &&
+                now - lastPointerPressTime <= interval &&
+                (screenPosition - lastPointerPressPosition).sqrMagnitude <= maxDistance * maxDistance;
+
+            if (isDoubleClose)
+            {
+                ResetDoublePointerPress();
+                SetVisible(false);
+                LogSelection("Map closed by a double pointer press from " + pointer.displayName + ".");
+                return;
+            }
+
+            if (hasPendingPointerGoalSelection)
+                CompletePendingPointerGoalSelection(true);
+
+            lastPointerPressTime = now;
+            lastPointerPressPosition = screenPosition;
+            lastPointerDeviceId = pointer.deviceId;
+            hasPendingPointerGoalSelection = true;
+            pendingPointerGoalSelectionTime = now + interval;
+            pendingPointerGoalSelectionUsesRay = mouseUsesPointerPosition && gazeCamera != null;
+            if (pendingPointerGoalSelectionUsesRay)
+                pendingPointerGoalSelectionRay = gazeCamera.ScreenPointToRay(screenPosition);
+        }
+
+        private void CompletePendingPointerGoalSelection(bool force = false)
+        {
+            if (!hasPendingPointerGoalSelection || (!force && Time.unscaledTime < pendingPointerGoalSelectionTime))
+                return;
+
+            bool useRay = pendingPointerGoalSelectionUsesRay;
+            Ray selectionRay = pendingPointerGoalSelectionRay;
+            ResetDoublePointerPress();
+
+            if (!visible)
+                return;
+
+            if (useRay)
+                TrySelectGoalFromMap(selectionRay);
+            else
+                TrySelectGoalFromMap();
+        }
+
+        private void SelectGoalFromPointerPosition(Vector2 screenPosition)
+        {
+            if (mouseUsesPointerPosition && gazeCamera != null)
+                TrySelectGoalFromMap(gazeCamera.ScreenPointToRay(screenPosition));
+            else
+                TrySelectGoalFromMap();
+        }
+#endif
+
+        private void ResetDoublePointerPress()
+        {
+            lastPointerPressTime = -999f;
+            lastPointerPressPosition = Vector2.zero;
+            lastPointerDeviceId = -1;
+            hasPendingPointerGoalSelection = false;
+            pendingPointerGoalSelectionTime = -999f;
+            pendingPointerGoalSelectionUsesRay = false;
         }
 
         public bool TrySelectGoalFromMap()
@@ -1039,10 +1151,11 @@ namespace MotorcycleNavigation
             Vector3 localHit = mapRect.InverseTransformPoint(worldHit);
             Rect rect = mapRect.rect;
 
+            if (!rect.Contains(new Vector2(localHit.x, localHit.y)))
+                return false;
+
             float u = Mathf.InverseLerp(rect.xMin, rect.xMax, localHit.x);
             float displayV = Mathf.InverseLerp(rect.yMin, rect.yMax, localHit.y);
-            if (u < 0f || u > 1f || displayV < 0f || displayV > 1f)
-                return false;
 
             normalized = new Vector2(u, DisplayToMapV(displayV));
             return true;

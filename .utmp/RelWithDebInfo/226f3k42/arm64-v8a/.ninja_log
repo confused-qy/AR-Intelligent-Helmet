@@ -1,0 +1,10 @@
+# ninja log v5
+203	1626	8074764599538228	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	fab0a14ead9a8571
+211	1634	8074764599584819	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	f4e771e7b251558e
+1	1665	8074764599861719	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	117f6b80d976ada2
+218	1666	8074764599908342	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	72524b69f48323e4
+183	1695	8074764600301332	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	e0c7ac012739b121
+194	1853	8074764601811620	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d4039d5915cf88a9
+227	1855	8074764601827665	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	37d59f3d62eeb9d8
+171	1936	8074764602569987	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	8c3e059a2868f110
+1936	2341	8074764606775410	C:/dada_docs/2026/450/AR-Intelligent-Helmet/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/226f3k42/obj/arm64-v8a/libgame.so	7ff42e46b61c758f
