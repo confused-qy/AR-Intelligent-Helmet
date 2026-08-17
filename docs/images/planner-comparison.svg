@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 640" width="1160" height="640" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#EDF0F3" stroke-width="1"/>
+    </pattern>
+    <marker id="arrowRed" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+      <path d="M0,0 L0,6.4 L8,3.2 z" fill="#E5534B"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto">
+      <path d="M0,0 L0,6.4 L8,3.2 z" fill="#2F81F7"/>
+    </marker>
+    <marker id="tick" markerWidth="8" markerHeight="8" refX="4" refY="2.8" orient="auto">
+      <path d="M0,0 L0,5.6 L7,2.8 z" fill="#6E7781"/>
+    </marker>
+  </defs>
+
+  <rect width="1160" height="640" fill="#FBFBFC"/>
+
+  <!-- ══════════════ TITLE ══════════════ -->
+  <text x="580" y="34" text-anchor="middle" font-size="19" font-weight="600" fill="#24292F">
+    Position-only grid A* vs. pose-space A*
+  </text>
+  <text x="580" y="55" text-anchor="middle" font-size="13" fill="#6E7781">
+    Identical start pose, identical goal, identical costmap
+  </text>
+
+  <!-- ══════════════════════════════════════════════════════════
+       LEFT PANEL — GRID A*
+       ══════════════════════════════════════════════════════════ -->
+  <g>
+    <rect x="30" y="72" width="540" height="452" rx="8" fill="#FFFFFF" stroke="#DDE1E6" stroke-width="1.5"/>
+    <rect x="31" y="73" width="538" height="450" rx="7" fill="url(#grid)"/>
+
+    <!-- buildings -->
+    <g fill="#C9D1D9" stroke="#AEB8C2" stroke-width="1.5">
+      <rect x="150" y="130" width="110" height="130" rx="2"/>
+      <rect x="150" y="310" width="110" height="150" rx="2"/>
+      <rect x="330" y="90"  width="120" height="70"  rx="2"/>
+      <rect x="330" y="210" width="120" height="180" rx="2"/>
+      <rect x="480" y="330" width="65"  height="140" rx="2"/>
+    </g>
+
+    <!-- path -->
+    <polyline points="90,470 90,285 297,285 297,185 520,185 520,138"
+              fill="none" stroke="#E5534B" stroke-width="3.5"
+              stroke-linejoin="miter" stroke-linecap="round" marker-end="url(#arrowRed)"/>
+
+    <!-- corner markers -->
+    <g stroke="#E5534B" stroke-width="2.2" stroke-linecap="round">
+      <g transform="translate(90,285)">
+        <circle r="9" fill="#FFF0EF" stroke="#E5534B" stroke-width="1.6"/>
+        <path d="M-4,-4 L4,4 M4,-4 L-4,4"/>
+      </g>
+      <g transform="translate(297,285)">
+        <circle r="9" fill="#FFF0EF" stroke="#E5534B" stroke-width="1.6"/>
+        <path d="M-4,-4 L4,4 M4,-4 L-4,4"/>
+      </g>
+      <g transform="translate(297,185)">
+        <circle r="9" fill="#FFF0EF" stroke="#E5534B" stroke-width="1.6"/>
+        <path d="M-4,-4 L4,4 M4,-4 L-4,4"/>
+      </g>
+      <g transform="translate(520,185)">
+        <circle r="9" fill="#FFF0EF" stroke="#E5534B" stroke-width="1.6"/>
+        <path d="M-4,-4 L4,4 M4,-4 L-4,4"/>
+      </g>
+    </g>
+
+    <!-- callout -->
+    <path d="M 288 294 Q 240 330 152 348" fill="none" stroke="#6E7781" stroke-width="1.2"
+          stroke-dasharray="3 3" marker-end="url(#tick)"/>
+    <rect x="46" y="332" width="104" height="34" rx="5" fill="#FFF0EF" stroke="#E5534B" stroke-width="1"/>
+    <text x="98" y="347" text-anchor="middle" font-size="11.5" font-weight="600" fill="#B0332C">90° corner</text>
+    <text x="98" y="360" text-anchor="middle" font-size="10.5" fill="#B0332C">not executable</text>
+
+    <!-- start / goal -->
+    <g>
+      <circle cx="90" cy="470" r="8" fill="#2DA44E" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="90" y="496" text-anchor="middle" font-size="11" font-weight="600" fill="#1A7F37">START</text>
+    </g>
+    <g>
+      <circle cx="520" cy="130" r="8" fill="#FB8500" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="520" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#BF6400">GOAL</text>
+    </g>
+
+    <!-- panel label -->
+    <rect x="46" y="88" width="176" height="26" rx="5" fill="#FFF0EF" stroke="#E5534B" stroke-width="1"/>
+    <text x="58" y="106" font-size="12.5" font-weight="600" fill="#B0332C">Grid A* — state (x, y)</text>
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════
+       RIGHT PANEL — POSE-SPACE A*
+       ══════════════════════════════════════════════════════════ -->
+  <g transform="translate(560,0)">
+    <rect x="30" y="72" width="540" height="452" rx="8" fill="#FFFFFF" stroke="#DDE1E6" stroke-width="1.5"/>
+    <rect x="31" y="73" width="538" height="450" rx="7" fill="url(#grid)"/>
+
+    <!-- buildings (identical) -->
+    <g fill="#C9D1D9" stroke="#AEB8C2" stroke-width="1.5">
+      <rect x="150" y="130" width="110" height="130" rx="2"/>
+      <rect x="150" y="310" width="110" height="150" rx="2"/>
+      <rect x="330" y="90"  width="120" height="70"  rx="2"/>
+      <rect x="330" y="210" width="120" height="180" rx="2"/>
+      <rect x="480" y="330" width="65"  height="140" rx="2"/>
+    </g>
+
+    <!-- turning-radius construction, drawn on the final corner where the centre and label both sit in free space -->
+    <circle cx="480" cy="145" r="40" fill="none" stroke="#8B949E" stroke-width="1.3" stroke-dasharray="4 4"/>
+    <circle cx="480" cy="145" r="2.5" fill="#8B949E"/>
+    <line x1="480" y1="145" x2="480" y2="185" stroke="#8B949E" stroke-width="1.3" stroke-dasharray="4 4"/>
+    <text x="487" y="170" font-size="11" font-weight="600" fill="#57606A">R</text>
+    <text x="500" y="216" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1F5FBF">R = 0.8 m</text>
+    <text x="500" y="229" text-anchor="middle" font-size="9.5" fill="#57606A">min turning radius</text>
+
+    <!-- smooth path -->
+    <path d="M 90 470 L 90 325 Q 90 285 130 285 L 257 285 Q 297 285 297 245
+             L 297 225 Q 297 185 337 185 L 480 185 Q 520 185 520 145 L 520 138"
+          fill="none" stroke="#2F81F7" stroke-width="3.5"
+          stroke-linecap="round" marker-end="url(#arrowBlue)"/>
+
+    <!-- vehicle footprint at sampled poses -->
+    <g fill="#FFFFFF" stroke="#1F5FBF" stroke-width="1.8">
+      <rect x="-5" y="-9" width="10" height="18" rx="2.5" transform="translate(90,395) rotate(0)"/>
+      <rect x="-5" y="-9" width="10" height="18" rx="2.5" transform="translate(196,285) rotate(90)"/>
+      <rect x="-5" y="-9" width="10" height="18" rx="2.5" transform="translate(297,228) rotate(0)"/>
+      <rect x="-5" y="-9" width="10" height="18" rx="2.5" transform="translate(414,185) rotate(90)"/>
+    </g>
+    <g fill="#1F5FBF">
+      <circle cx="90"  cy="388" r="2"/>
+      <circle cx="203" cy="285" r="2"/>
+      <circle cx="297" cy="221" r="2"/>
+      <circle cx="421" cy="185" r="2"/>
+    </g>
+
+    <!-- start / goal -->
+    <g>
+      <circle cx="90" cy="470" r="8" fill="#2DA44E" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="90" y="496" text-anchor="middle" font-size="11" font-weight="600" fill="#1A7F37">START</text>
+    </g>
+    <g>
+      <circle cx="520" cy="130" r="8" fill="#FB8500" stroke="#FFFFFF" stroke-width="2"/>
+      <text x="520" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#BF6400">GOAL</text>
+    </g>
+
+    <!-- panel label -->
+    <rect x="46" y="88" width="216" height="26" rx="5" fill="#F0F6FF" stroke="#2F81F7" stroke-width="1"/>
+    <text x="58" y="106" font-size="12.5" font-weight="600" fill="#1F5FBF">Pose-space A* — state (x, y, θ)</text>
+  </g>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <g>
+    <line x1="30" y1="552" x2="1130" y2="552" stroke="#E4E8EC" stroke-width="1"/>
+
+    <text x="30" y="576" font-size="12.5" fill="#57606A">
+      <tspan font-weight="600" fill="#B0332C">Left:</tspan>
+      <tspan> 4-connected search over (x, y). Corners are axis-aligned right angles — a vehicle with a turning radius cannot follow them.</tspan>
+    </text>
+    <text x="30" y="597" font-size="12.5" fill="#57606A">
+      <tspan font-weight="600" fill="#1F5FBF">Right:</tspan>
+      <tspan> heading is part of the search state (32 bins). Per-step heading change is bounded by </tspan>
+      <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#24292F">Δθ ≤ stepMeters / minTurningRadius,</tspan>
+      <tspan> so every</tspan>
+    </text>
+    <text x="30" y="616" font-size="12.5" fill="#57606A">
+      <tspan>transition is kinematically feasible by construction. Outlined rectangles show the vehicle footprint and heading at sampled poses.</tspan>
+    </text>
+  </g>
+
+  <text x="1130" y="616" text-anchor="end" font-size="10.5" fill="#8B949E" font-style="italic">Schematic illustration</text>
+
+</svg>

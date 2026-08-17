@@ -47,3 +47,7 @@ crashlytics-build.properties
 Thumbs.db
 Desktop.ini
 
+# Full-resolution capture originals — keep locally, never commit.
+# Only the compressed versions in docs/images/ belong in the repo.
+docs/images/_source/
+
