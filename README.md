@@ -4,6 +4,8 @@
 
 Checking a phone while riding means looking down and losing a hand. This puts navigation in the rider's field of view instead — and because the planner carries heading in its search state, the routes it produces are actually rideable, not the right-angle paths a grid algorithm returns.
 
+*Built for a capstone by a five-person team. This repository is the navigation and path-planning subsystem; localization, VR/HMI, and hardware integration were owned by teammates.*
+
 ![Full navigation loop: select a destination on the map, route is planned, ground arrow guides the rider](docs/images/hero-demo.gif)
 
 | | |
@@ -11,7 +13,8 @@ Checking a phone while riding means looking down and losing a hand. This puts na
 | **Plans** | Pose-space A\* over a 33.5M-state space, constrained by a 0.8 m minimum turning radius |
 | **Represents** | 1024 × 1024 occupancy grid (~1.05M cells), ROS `costmap_2d` conventions, inflation layer |
 | **Obeys** | Lane direction, solid/dashed boundaries, turn connectors — a pluggable semantic rule layer |
-| **Streams** | 6 turn cues + a JPEG-compressed 256 px local submap to the helmet at 1 Hz |
+| **Streams** | 6 turn cues + a JPEG-compressed 256 px local submap to a Micro OLED display at 1 Hz |
+| **Verified** | 6 QFD-derived specifications — 30 ms route update, 30 FPS, 90 ms latency, 10 min zero-failure run |
 | **Runs on** | Unity 6000.4.1f1 · URP · IL2CPP/ARM64 · Android 12 / RK3588 · OpenXR |
 
 ![The AR helmet running the navigation build on an RK3588 board](docs/images/helmet-hardware.gif)
@@ -132,7 +135,7 @@ The manager ticks at 0.25 s for logic and pushes to hardware at 1 Hz. Replanning
 
 ## Hardware bridge
 
-Unity and the Android host communicate over `SendMessage`, which carries one string per call, so everything is serialized by hand. Pose arrives as comma-separated floats and is parsed tolerantly — malformed input is ignored rather than thrown, and when orientation is unavailable, heading is inferred from displacement, gated at 2 cm so a stationary rider's heading does not jitter on noise.
+Unity and the Android host communicate over `SendMessage`, which carries one string per call, so everything is serialized by hand. Rider pose originates from a u-blox M8N GPS and MPU-9250 IMU fused through an Extended Kalman Filter with map matching, and arrives here as comma-separated floats. Parsing is tolerant — malformed input is ignored rather than thrown, and when orientation is unavailable, heading is inferred from displacement, gated at 2 cm so a stationary rider's heading does not jitter on noise.
 
 Two payloads go out at 1 Hz: one of six `NavTurnType` cues, computed by projecting the rider onto the path *segment* (not the nearest waypoint, which jumps discontinuously) and scanning 12 m ahead for the first direction change over 15°; and an 18 m local submap rendered at 256 px, JPEG-encoded at quality 70 as a base64 data URI. Every number there is a bandwidth and power decision. During planning a procedurally generated spinner goes out instead, so the display never freezes.
 
@@ -157,6 +160,27 @@ All tuning lives in serialized settings classes on `MotorcycleNavigationManager`
 
 ---
 
+## Validation
+
+Six engineering specifications were derived from customer requirements through a QFD analysis, each bound to a measurable verification method up front, then measured in the Unity environment.
+
+| Specification | Target | Measured |
+|---|---|---|
+| Route update | ≤ 50 ms | **~30 ms** (on a ~200 m local cost map) |
+| Off-route replanning | ≤ 1 s | ~1 s |
+| Map generation | ≤ 2 s | ~1 s |
+| Peak memory | ≤ 200 MB | ~20 MB |
+| Pose update rate | ≥ 10 Hz | 10 Hz |
+| Frame rate | ≥ 30 FPS | 30 FPS (mean and minimum) |
+| Pose-to-render latency | < 100 ms | ~90 ms mean |
+| Continuous operation | ≥ 10 min | 10 min, zero crashes / planning failures / warning-state errors |
+
+Hazard warning was tested across four scenarios — vehicle approaching from behind (3 m), leading vehicle decelerating (3 m), pedestrian crossing (8 m), emergency vehicle (10 m) — plus a no-hazard control. All four produced the correct warning; the control produced none.
+
+**What this does not establish.** The Unity ground-truth pose does not reproduce GPS/IMU noise, bias, or drift, so the ≤ 1.0 m physical localization target is unverified. Software frame rate and latency exclude the Micro OLED module's communication and optical delay. Simulated lighting demonstrates nothing about outdoor brightness, contrast, or rider visibility. Four scripted hazard scenarios do not represent real-world recognition under weather, occlusion, and traffic. Planning timings apply to the tested map size and configuration. Ten minutes says nothing about thermal behaviour, battery endurance, or long-term durability.
+
+---
+
 ## The shipped demo uses the grid planner
 
 `PlannerSettings.useGridPlannerOnly` is enabled in the demo scene, so the position-only planner is what actually runs.
@@ -170,4 +194,14 @@ points=19  length=301.4m  turns=17  expanded=156075
 ```
 
 A 301-meter route expanding ~156,000 nodes — about **0.5% of the state space**. `NavigationBenchmark.cs` runs seeded randomized start/goal pairs across both planners and reports success rate, latency percentiles, and cumulative heading change.
+
+---
+
+## Known gaps
+
+- **Planning is synchronous on the Unity main thread.** A global query far exceeds a VR frame budget. Mitigated by throttling and a loading indicator, not solved.
+- **The costmap is static.** Dynamic vehicles are not written into it, so the planner will not route around moving traffic.
+- **No automated tests.** Validation above was executed manually against the specification table. The planning and spatial layers are pure C# with no `MonoBehaviour` dependency and would be straightforward to cover in EditMode tests — the first one worth writing asserts that every segment of a returned path satisfies the minimum turning radius.
+- **Collision checking is sampled, not analytic.** Obstacles thinner than the sample spacing can theoretically be missed.
+- **The heuristic is not strictly admissible.** The lane-aligned cost multiplier is below 1, so Euclidean distance is not a true lower bound and optimality is not guaranteed.
 
